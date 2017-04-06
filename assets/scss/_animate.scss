@@ -1,0 +1,73 @@
+@import "https://cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css";
+
+.animated { 
+    @include anim-duration(1.4s);
+    @include anim-fill-mode(both)
+}
+
+.bounceInDown { @include anim-name(bounceInDown) }
+.bounceInUp { @include anim-name(bounceInUp) }
+.bounceIn { @include anim-name(bounceIn) }
+.bounceInRight { @include anim-name(bounceInRight) }
+.bounceInLeft { @include anim-name(bounceInLeft) }
+
+//
+.aa { @include delay(.1s) }
+.ad { @include delay(.2s) }
+.ai { @include delay(.3s) }
+.aw { @include delay(.4s) }
+.ai2 { @include delay(.5s) }
+.an { @include delay(.6s) }
+.aa2 { @include delay(.7s) }
+.at { @include delay(.8s) }
+.aa3 { @include delay(.9s) }
+
+//
+.bs { @include delay(1s) }
+.bo { @include delay(1.1s) }
+.bf { @include delay(1.2s) }
+.bt { @include delay(1.3s) }
+.bw { @include delay(1.4s) }
+.ba { @include delay(1.5s) }
+.br { @include delay(1.6s) }
+.be { @include delay(1.7s) }
+.bd { @include delay(1.8s) }
+.be2 { @include delay(1.9s) }
+.bv { @include delay(2s) }
+.be3 { @include delay(2.1s) }
+.bl { @include delay(2.2s) }
+.bo2 { @include delay(2.3s) }
+.bp { @include delay(2.4s) }
+.be4 { @include delay(2.5s) }
+.br2 { @include delay(2.6s) }
+.sp { @include delay(2.7s) }
+.bdot { @include delay(2.8s) }
+.bn { @include delay(2.9s) }
+.be5 { @include delay(3s) }
+.bt2 { @include delay(3.1s) }
+.sp2 { @include delay(3.2s) }
+.bj { @include delay(3.3s) }
+.ba2 { @include delay(3.4s) }
+.bv2 { @include delay(3.5s) }
+.ba3 { @include delay(3.6s) }
+.bs2 { @include delay(3.7s) }
+.bc { @include delay(3.8s) }
+.br3 { @include delay(3.9s) }
+.bi { @include delay(4s) }
+.bp2 { @include delay(4.1s) }
+.bt3 { @include delay(4.2s) }
+.sp3 { @include delay(4.3s) }
+
+//
+.ft { @include delay(5.7s) }
+
+//
+.bl1 { @include delay(7.1s) }
+.bl2 { @include delay(7.1s) }
+.bl3 { @include delay(7.1s) }
+.bl4 { @include delay(7.1s) }
+.bl5 { @include delay(7.1s) }
+
+//
+.ct1 { @include delay(8.5s) }
+.ct2 { @include delay(8.6s) }

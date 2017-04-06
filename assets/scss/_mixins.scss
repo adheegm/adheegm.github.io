@@ -1,0 +1,82 @@
+@mixin anim-name($name) {
+    -webkit-animation-name: $name;
+    -moz-animation-name: $name;
+    -o-animation-name: $name;
+    animation-name: $name;
+}
+
+@mixin delay($tm) {
+    animation-delay: $tm;
+    -moz-animation-delay: $tm;
+    -webkit-animation-delay: $tm;
+}
+
+@mixin anim-duration($dur) {
+    -webkit-animation-duration: $dur;
+    -moz-animation-duration: $dur;
+    -o-animation-duration: $dur;
+    animation-duration: $dur;
+}
+
+@mixin anim-fill-mode($mode) {
+    -webkit-animation-fill-mode: $mode;
+    -moz-animation-fill-mode: $mode;
+    -o-animation-fill-mode: $mode;
+    animation-fill-mode: $mode;
+}
+
+@mixin profile-image {
+    img {
+        border: 4px solid $border-color !important;
+        border-radius: 50%;
+        width: 128px;
+        height: 128px;
+        margin-top: $gut;
+        margin-bottom: $gut;
+    }
+}
+
+@mixin content {
+    @include span(12 no-gutters);
+    line-height: 1.88;
+}
+
+@mixin profile {
+    text-align: center;
+    a {
+        display: inline-block;
+    }
+    @include profile-image();
+}
+
+@mixin inlining-ul {
+    li {
+        margin: 12px;
+        display: inline;
+        a {
+            font-size: 24px;
+        }
+    }
+}
+
+@mixin spash-text {
+    text-align: center;
+    color: $base-color;
+}
+
+@mixin social-items {
+    text-align: center;
+    @include inlining-ul();
+}
+
+@mixin special-content($fs) {
+    color: $base-color;
+    font-size: $fs;
+    span.word {
+        margin: 0 4px;
+    }
+
+    span {
+        display: inline-block;
+    }
+}
