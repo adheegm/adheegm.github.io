@@ -1,5 +1,6 @@
 ---
     layout: home
+    title: Home
 ---
 <header>
     <div id="profile">
@@ -66,21 +67,28 @@
             <img alt="Me" src="{{ site.baseurl }}/assets/img/pp.jpg"/>
         </a> 
     </div>
-    <div id="splash-text">
-        <span class="animated block bl1 bounceInDown">I'm a full stack software developer.</span>
-        <span class="animated block bl2 bounceInLeft">I'm not an algorithm expert.</span>
-        <span class="animated block bl3 bounceIn">But i love to problem solving.</span>
-        <span class="animated block bl4 bounceInRight">Very excited with javascript technologies.</span>
-        <span class="animated block bl5 bounceInUp">But i'm open to any technology that can solves all of my problem.</span>
+    <div id="splash">
+        <div class="animated bl1 bounceInRight">I'm a full stack software developer.</div>
+        <div class="animated bl2 bounceInLeft">I'm not an algorithm expert.</div>
+        <div class="animated bl3 bounceInRight">But i love to problem solving.</div>
+        <div class="animated bl4 bounceInLeft">Very excited with javascript technologies.</div>
+        <div class="animated bl5 bounceInRight">But i'm open to any technology that can solves all of my problem.</div>
     </div>
 </header>     
-<section>
-    <div class="page animated ct1 bounceInDown" id="home">
-        <a href="resume.pdf">Download My Resume</a>
-    </div>
-</section>
+<div>
+    <section>
+        <div class="animated ct1 bounceIn" id="home">
+            <a href="resume.pdf" target="_blank">Download My Resume</a>
+        </div>
+    </section>
+    <section>
+        <div class="animated ct2 rotateIn" id="home">
+            <a href="/blog" target="_blank">Blog</a>
+        </div>
+    </section>
+</div>
 <footer>
-    <ul id="social-items" class="animated ct2 bounceInUp">
+    <ul id="social-items" class="animated ct3 bounceIn">
         <li class="socialItem">
             <a href="https://github.com/adheegm" target="_blank">
                 <i class="fa fa-github-square" aria-hidden="true"></i>

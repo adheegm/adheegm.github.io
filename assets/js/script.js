@@ -18,5 +18,3 @@ var page = (function(window) {
         }
     }
 })(this);
-
-page.init();

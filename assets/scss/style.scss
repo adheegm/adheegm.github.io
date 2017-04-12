@@ -7,4 +7,12 @@
 @import "mixins";
 @import "grid";
 @import "globals";
+
+@import "modules/controls";
+
+//home
+@import "https://cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css";
 @import "animate";
+
+//blog
+@import "puzzle";

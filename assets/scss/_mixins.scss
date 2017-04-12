@@ -31,14 +31,14 @@
         border-radius: 50%;
         width: 128px;
         height: 128px;
-        margin-top: $gut;
-        margin-bottom: $gut;
+        margin-top: $mPadding;
+        margin-bottom: $mPadding;
     }
 }
 
 @mixin content {
     @include span(12 no-gutters);
-    line-height: 1.88;
+    line-height: 1.8;
 }
 
 @mixin profile {
@@ -54,12 +54,12 @@
         margin: 12px;
         display: inline;
         a {
-            font-size: 24px;
+            font-size: 28px;
         }
     }
 }
 
-@mixin spash-text {
+@mixin spash {
     text-align: center;
     color: $base-color;
 }
@@ -70,7 +70,6 @@
 }
 
 @mixin special-content($fs) {
-    color: $base-color;
     font-size: $fs;
     span.word {
         margin: 0 4px;

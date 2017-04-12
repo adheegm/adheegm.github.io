@@ -1,56 +1,20 @@
 body {
-    font-family: 'Strait', sans-serif;
+    font-family: $font-family;
     font-size: $font-size;
 }
 
 a {
     color: $link-color;
     text-decoration: none;
-    &:hover {
-        color: $base-color;
-    }
+    &:hover { color: $base-color }
 }
 
-.container {
-    @include container();
-    @include clearfix;
-}
+header, section, footer { padding: $mPadding }
 
-.content {
-    @include content();
-}
+.container { @include container(); @include clearfix; }
+.content { @include content() }
 
-#profile {
-    @include profile();
-}
-
-#splash-text {
-    @include spash-text();
-}
-
-#social-items {
-    @include social-items();
-}
-
-#home {
-    text-align: center;
-}
-
-.big, .medium, .block {
-    display: block;
-}
-
-.big {
-    @include special-content(48px);
-}
-
-.medium {
-    @include special-content($font-size);
-}
-.sym {
-    margin: 0 8px;
-}
-
-header, section, footer {
-    padding: $gut;
-}
+#profile { @include profile() }
+#splash { @include spash() }
+#social-items { @include social-items() }
+#home { text-align: center }
