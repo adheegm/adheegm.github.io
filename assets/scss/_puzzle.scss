@@ -1,4 +1,7 @@
 .board {
+    float: left;
+    cursor: pointer;
+    background: no-repeat url("/assets/img/sample-image.jpg");
     &:hover {
         opacity: 0.7;
         filter: alpha(opacity=70);
@@ -6,6 +9,13 @@
 }
 
 .hide {
-    opacity: 0.0;
-    filter: alpha(opacity=0);
+    display: none;
+}
+
+#puzzleGame {
+    #container {
+        margin: 0 auto;
+        border: none;
+        background: no-repeat url("/assets/img/sample-image.jpg");
+    }
 }

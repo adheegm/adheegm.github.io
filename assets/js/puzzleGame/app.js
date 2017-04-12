@@ -1,33 +1,35 @@
 var gc = document.getElementById("puzzleGame"),
     container = document.getElementById("container"),
     btnShowImage = document.getElementById("btnShowImage"),
-    column = 10, 
-    row = 10, 
-    imageSize = 380,
-    boardWidth, 
-    boardHeight,
+    dimension = 1,  
+    imageSize = 720,
     counter,
-    isGameOver = false,
-    validState = new Array();
+    bGameOver = false,
+    movement = [],
+    validState = [];
 
-//module
+//game module
 var puzzle = {};
 
 var board = (function(){
+    var boardWidth, boardHeight;
+    function drawBackground(el) {
+        var val = el.dataset.value;
+        
+        /**draw background position */
+        el.style.backgroundPosition = "left " + ((val % dimension) * -1 * boardWidth) + "px top " + (Math.floor(val / dimension) * -1 * boardWidth) + "px";
+        /** */
+        
+        el.style.backgroundSize = imageSize + "px " + imageSize + "px";
+    }
     return {
-        drawBackground: function(el) {
-            var val = el.dataset.value;
-            el.style.background = "no-repeat url(\"/assets/img/sample-image.jpg\")";
-            el.style.backgroundPosition = "left " + ((val % column) * -1 * boardWidth) + "px top " + (Math.floor(val / row) * -1 * boardWidth) + "px";
-            el.style.backgroundSize = imageSize + "px " + imageSize + "px";
-        },
-        drawBoards: function () {
+        init: function () {
             container.innerHTML = "",     
-            boardWidth = container.offsetWidth / column,
-            boardHeight = container.offsetHeight / row;
+            boardWidth = container.offsetWidth / dimension,
+            boardHeight = container.offsetHeight / dimension;
 
             var val = [], 
-                valLength = column * row;
+                valLength = Math.pow(dimension, 2);
             
             while(val.length < valLength){
                 var num = Math.ceil(Math.random() * valLength)
@@ -37,20 +39,9 @@ var board = (function(){
             }
             
             for(var i = 0; i < val.length; i++) {
-                var el = document.createElement("div");             
-                
-                el.dataset.value = val[i] - 1;
-                el.className += "board";
-                
-                el.style.width = boardWidth + "px";
-                el.style.height = boardHeight + "px";
-                el.style.display = "inline";
-                el.style.cssFloat = "left";
-                el.style.cursor = "pointer";
-
-                board.drawBackground(el);   
-                container.appendChild(el);       
-
+                var el = this.template(val[i] - 1);
+                container.appendChild(el);    
+                drawBackground(el);      
                 validState.push(i);
             }
             
@@ -59,13 +50,29 @@ var board = (function(){
                 boards[i].addEventListener("click", handler.onBoardClick);
             }
         },
+        template: function(val) {
+            var el = document.createElement("div");             
+                
+            el.dataset.value = val;
+            el.classList.add("board");
+            
+            el.style.width = boardWidth + "px";
+            el.style.height = boardHeight + "px";
+
+            return el;
+        },
         swapValue: function (from, to) {
             if(from == to) return;
+            
+            /** swap value */
             container.children[from].dataset.value = parseInt(container.children[from].dataset.value) + parseInt(container.children[to].dataset.value);
             container.children[to].dataset.value = parseInt(container.children[from].dataset.value) - parseInt(container.children[to].dataset.value);
             container.children[from].dataset.value = parseInt(container.children[from].dataset.value) - parseInt(container.children[to].dataset.value);
-            board.drawBackground(container.children[from]);
-            board.drawBackground(container.children[to]);
+            /** */
+
+            drawBackground(container.children[from]);
+            drawBackground(container.children[to]);
+            
             counter++;
         }
     }
@@ -74,66 +81,65 @@ var board = (function(){
 var canvas = (function() {
     return {        
         init: function() {
-            container.style.margin = "0 auto";
-            container.style.border = "none";
             container.style.width = imageSize + "px";
             container.style.height = imageSize + "px";
-            container.style.background = "no-repeat url(\"/assets/img/sample-image.jpg\")";
-            board.drawBoards();
+            board.init();
         }
     }
 })();
 
 var handler = (function(){
-    function checkGameState() {
-        var state = [];
-        for(var i = 0; i < container.children.length; i++) {
-            state.push(parseInt(container.children[i].dataset.value));
-        }
-        isGameOver = JSON.stringify(validState) === JSON.stringify(state);
-        return isGameOver;
-    }
-
-    var from = to = undefined;
-
     return {
-        onButtonShowImageDown: function(e) {
+        onButtonShowImageClick: function(e) {
+            if(bGameOver) puzzle.start();
             var boards = document.getElementsByClassName("board");
-            for(var i=0;i<boards.length;i++){
-                boards[i].classList.add("hide");
-            }
-        },
-        onButtonShowImageUp: function(e) {
-            var boards = document.getElementsByClassName("board");
-            for(var i=0;i<boards.length;i++){
-                boards[i].classList.remove("hide");
+            var action = e.target.innerHTML;
+            e.target.innerHTML = (action === "Show Image") ? "Continue" : "Show Image";
+            for(var i = 0; i < boards.length; i++){
+                action === "Show Image" ? boards[i].classList.add("hide") : boards[i].classList.remove("hide");
             }
         },
         onBoardClick: function(e) { 
-            if(isGameOver) return;
-            
-            if(from === undefined) {
-                from = [].indexOf.call(e.target.parentNode.children, e.target);
-            }
-            else {
-                to = [].indexOf.call(e.target.parentNode.children, e.target);
-                board.swapValue(from, to);
-                from = to = undefined;
-                if(checkGameState()) {
-                    document.getElementById("message").innerHTML = "Game Over";                    
-                }
-            }            
+            if(bGameOver) return;   
+            puzzle.swapBoard(e.target);         
         }
     }
 })();
 
 (function(puzzle) {
-    puzzle.init = function() {
-        counter = 0;
-        isGameOver = false;
-        canvas.init();
+    var messageBox = document.getElementById("message");
+    puzzle.checkGameState = function() {
+        var state = [];
+        for(var i = 0; i < container.children.length; i++) {
+            state.push(parseInt(container.children[i].dataset.value));
+        }
+        bGameOver = JSON.stringify(validState) === JSON.stringify(state);
+        return bGameOver;
     }
-    btnShowImage.addEventListener("mousedown", handler.onButtonShowImageDown);
-    btnShowImage.addEventListener("mouseup", handler.onButtonShowImageUp);
-    return puzzle;
+    puzzle.gameOver = function() {
+        messageBox.innerHTML = "Game Over!!!";   
+        btnShowImage.innerHTML = "Next";
+    }
+    var from = to = undefined;
+    puzzle.swapBoard = function(el) {
+        if(from === undefined) {
+            from = [].indexOf.call(el.parentNode.children, el);
+        }
+        else {
+            to = [].indexOf.call(el.parentNode.children, el);
+            board.swapValue(from, to);
+            from = to = undefined;
+            if(puzzle.checkGameState()) puzzle.gameOver();
+        }   
+    }
+    puzzle.start = function() {
+        counter = 0;
+        bGameOver = false;
+        validState = [];
+        movement = [];
+        dimension++;
+        messageBox.innerHTML = "";
+        canvas.init();
+    }    
+    btnShowImage.addEventListener("click", handler.onButtonShowImageClick);
 })(puzzle);
