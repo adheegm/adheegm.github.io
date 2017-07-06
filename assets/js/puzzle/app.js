@@ -1,35 +1,24 @@
-var gc = document.getElementById("puzzleGame"),
-    container = document.getElementById("container"),
-    btnShowImage = document.getElementById("btnShowImage"),
+var container = document.getElementById("container"),
     dimension = 1,  
-    imageSize = 720,
-    counter,
-    bGameOver = false,
-    movement = [],
-    validState = [];
+    imageSize = 720;
 
-//game module
+//module
 var puzzle = {};
 
 var board = (function(){
     var boardWidth, boardHeight;
-    function drawBackground(el) {
-        var val = el.dataset.value;
-        
-        /**draw background position */
-        el.style.backgroundPosition = "left " + ((val % dimension) * -1 * boardWidth) + "px top " + (Math.floor(val / dimension) * -1 * boardWidth) + "px";
-        /** */
-        
+    function setBackground(el) {
+        var val = el.dataset.value;        
+        el.style.backgroundPosition = "left " + ((val % dimension) * -1 * boardWidth) + "px top " + (Math.floor(val / dimension) * -1 * boardHeight) + "px";
         el.style.backgroundSize = imageSize + "px " + imageSize + "px";
     }
     return {
-        init: function () {
+        drawBoard: function () {
             container.innerHTML = "",     
             boardWidth = container.offsetWidth / dimension,
             boardHeight = container.offsetHeight / dimension;
 
-            var val = [], 
-                valLength = Math.pow(dimension, 2);
+            var val = [], valLength = Math.pow(dimension, 2);
             
             while(val.length < valLength){
                 var num = Math.ceil(Math.random() * valLength)
@@ -40,25 +29,18 @@ var board = (function(){
             
             for(var i = 0; i < val.length; i++) {
                 var el = this.template(val[i] - 1);
-                container.appendChild(el);    
-                drawBackground(el);      
-                validState.push(i);
-            }
-            
-            var boards = document.getElementsByClassName("board");
-            for(var i = 0; i < boards.length; i++) {
-                boards[i].addEventListener("click", handler.onBoardClick);
+                container.appendChild(el); 
+                puzzle.validState.push(i);
             }
         },
         template: function(val) {
-            var el = document.createElement("div");             
-                
+            var el = document.createElement("div");    
             el.dataset.value = val;
             el.classList.add("board");
-            
             el.style.width = boardWidth + "px";
-            el.style.height = boardHeight + "px";
-
+            el.style.height = boardHeight + "px";     
+            setBackground(el);      
+            el.addEventListener("click", handler.onBoardClick);   
             return el;
         },
         swapValue: function (from, to) {
@@ -70,10 +52,10 @@ var board = (function(){
             container.children[from].dataset.value = parseInt(container.children[from].dataset.value) - parseInt(container.children[to].dataset.value);
             /** */
 
-            drawBackground(container.children[from]);
-            drawBackground(container.children[to]);
+            setBackground(container.children[from]);
+            setBackground(container.children[to]);
             
-            counter++;
+            puzzle.counter++;
         }
     }
 })();
@@ -83,42 +65,43 @@ var canvas = (function() {
         init: function() {
             container.style.width = imageSize + "px";
             container.style.height = imageSize + "px";
-            board.init();
+            board.drawBoard();
         }
     }
 })();
 
 var handler = (function(){
     return {
-        onButtonShowImageClick: function(e) {
-            if(bGameOver) puzzle.start();
-            var boards = document.getElementsByClassName("board");
-            var action = e.target.innerHTML;
-            e.target.innerHTML = (action === "Show Image") ? "Continue" : "Show Image";
-            for(var i = 0; i < boards.length; i++){
-                action === "Show Image" ? boards[i].classList.add("hide") : boards[i].classList.remove("hide");
+        onButtonNavClick: function(e) {
+            if(puzzle.isGameOver()) puzzle.start();
+            else {
+                var boards = document.getElementsByClassName("board");
+                var action = e.target.innerHTML;
+                e.target.innerHTML = (action === "Show Image") ? "Continue" : "Show Image";
+                for(var i = 0; i < boards.length; i++)
+                    action === "Show Image" ? boards[i].classList.add("hide") : boards[i].classList.remove("hide");
             }
         },
         onBoardClick: function(e) { 
-            if(bGameOver) return;   
+            if(puzzle.isGameOver()) return;   
             puzzle.swapBoard(e.target);         
         }
     }
 })();
 
 (function(puzzle) {
-    var messageBox = document.getElementById("message");
-    puzzle.checkGameState = function() {
+    var btnNav = document.getElementById("btnNav"),
+        messageBox = document.getElementById("message");
+    puzzle.isGameOver = function() {
         var state = [];
         for(var i = 0; i < container.children.length; i++) {
             state.push(parseInt(container.children[i].dataset.value));
         }
-        bGameOver = JSON.stringify(validState) === JSON.stringify(state);
-        return bGameOver;
+        return JSON.stringify(puzzle.validState) === JSON.stringify(state);
     }
-    puzzle.gameOver = function() {
+    puzzle.onGameOver = function() {
         messageBox.innerHTML = "Game Over!!!";   
-        btnShowImage.innerHTML = "Next";
+        btnNav.innerHTML = "Next";
     }
     var from = to = undefined;
     puzzle.swapBoard = function(el) {
@@ -129,17 +112,17 @@ var handler = (function(){
             to = [].indexOf.call(el.parentNode.children, el);
             board.swapValue(from, to);
             from = to = undefined;
-            if(puzzle.checkGameState()) puzzle.gameOver();
+            if(puzzle.isGameOver()) puzzle.onGameOver();
         }   
     }
     puzzle.start = function() {
-        counter = 0;
-        bGameOver = false;
-        validState = [];
-        movement = [];
         dimension++;
-        messageBox.innerHTML = "";
+        messageBox.innerHTML = ""; 
+        btnNav.innerHTML = "Show Image";
+        puzzle.counter = 0;
+        puzzle.movement = [];
+        puzzle.validState = [];
         canvas.init();
     }    
-    btnShowImage.addEventListener("click", handler.onButtonShowImageClick);
+    btnNav.addEventListener("click", handler.onButtonNavClick);
 })(puzzle);

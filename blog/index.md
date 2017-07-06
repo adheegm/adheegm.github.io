@@ -11,8 +11,8 @@
     </div>
     <div id="stat" class="cContent">
         <div id="message"></div>
-        <a id="btnShowImage" class="btn cSm">Show Image</a>
+        <a id="btnNav" class="btn cSm"></a>
     </div>    
 </section>
-<script src="{{ site.baseurl }}/assets/js/puzzleGame/app.js"></script>
+<script src="{{ site.baseurl }}/assets/js/puzzle/app.js"></script>
 <script type="text/javascript">puzzle.start()</script>

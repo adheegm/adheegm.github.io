@@ -1,7 +1,7 @@
 title: Adi's Blog
 baseurl: ""
 highlighter: rouge
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 paginate: 8
 paginate_path: ":num"
 
