@@ -1,19 +1,19 @@
-var g = (function(){
+var g = (function () {
     return {
-        attachEvent: function(dom, name, handler) {
+        attachEvent: function (dom, name, handler) {
             dom.addEventListener(name, handler);
         }
     }
 })();
 
-var page = (function(window) {
+var page = (function (window) {
     var handler = {
-        scrollHandler: function(e) {
+        scrollHandler: function (e) {
             //logic
         }
     }
     return {
-        init: function() {            
+        init: function () {
             g.attachEvent(window, 'scroll', handler.scrollHandler);
         }
     }
