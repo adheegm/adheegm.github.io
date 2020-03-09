@@ -1,6 +1,6 @@
 var container = document.getElementById("container"),
     dimension = 1,
-    imageSize = 3024;
+    imageSize = 720;
 
 //module
 var puzzle = {};

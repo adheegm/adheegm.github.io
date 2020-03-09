@@ -1,81 +1,81 @@
 @mixin anim-name($name) {
-    -webkit-animation-name: $name;
-    -moz-animation-name: $name;
-    -o-animation-name: $name;
-    animation-name: $name;
+  -webkit-animation-name: $name;
+  -moz-animation-name: $name;
+  -o-animation-name: $name;
+  animation-name: $name;
 }
 
 @mixin delay($tm) {
-    animation-delay: $tm;
-    -moz-animation-delay: $tm;
-    -webkit-animation-delay: $tm;
+  animation-delay: $tm;
+  -moz-animation-delay: $tm;
+  -webkit-animation-delay: $tm;
 }
 
 @mixin anim-duration($dur) {
-    -webkit-animation-duration: $dur;
-    -moz-animation-duration: $dur;
-    -o-animation-duration: $dur;
-    animation-duration: $dur;
+  -webkit-animation-duration: $dur;
+  -moz-animation-duration: $dur;
+  -o-animation-duration: $dur;
+  animation-duration: $dur;
 }
 
 @mixin anim-fill-mode($mode) {
-    -webkit-animation-fill-mode: $mode;
-    -moz-animation-fill-mode: $mode;
-    -o-animation-fill-mode: $mode;
-    animation-fill-mode: $mode;
+  -webkit-animation-fill-mode: $mode;
+  -moz-animation-fill-mode: $mode;
+  -o-animation-fill-mode: $mode;
+  animation-fill-mode: $mode;
 }
 
 @mixin profile-image {
-    img {
-        border-radius: 50%;
-        width: 128px;
-        height: 128px;
-        margin-top: $mPadding;
-        margin-bottom: $mPadding;
-        padding: 8px;
-    }
+  img {
+    border-radius: 50%;
+    width: 128px;
+    height: 128px;
+    margin-top: $mPadding;
+    margin-bottom: $mPadding;
+    padding: 8px;
+  }
 }
 
 @mixin content {
-    @include span(12 no-gutters);
-    line-height: 1.8;
+  @include span(12 no-gutters);
+  line-height: 1.8;
 }
 
 @mixin profile {
-    text-align: center;
-    a {
-        display: inline-block;
-    }
-    @include profile-image();
+  text-align: center;
+  a {
+    display: inline-block;
+  }
+  @include profile-image();
 }
 
 @mixin inlining-ul {
-    li {
-        margin: 12px;
-        display: inline;
-        a {
-            font-size: 28px;
-        }
+  li {
+    margin: 12px;
+    display: inline;
+    a {
+      font-size: 28px;
     }
+  }
 }
 
 @mixin spash {
-    text-align: center;
-    color: $base-color;
+  text-align: center;
+  color: $base-color;
 }
 
 @mixin social-items {
-    text-align: center;
-    @include inlining-ul();
+  text-align: center;
+  @include inlining-ul();
 }
 
 @mixin special-content($fs) {
-    font-size: $fs;
-    span.word {
-        margin: 0 4px;
-    }
+  font-size: $fs;
+  span.word {
+    margin: 0 4px;
+  }
 
-    span {
-        display: inline-block;
-    }
+  span {
+    display: inline-block;
+  }
 }

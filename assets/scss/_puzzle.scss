@@ -1,21 +1,21 @@
 .board {
-    float: left;
-    cursor: pointer;
-    background: no-repeat url("/assets/img/jazmin-quaynor-CXjp1ycr5Vw-unsplash.jpg");
-    &:hover {
-        opacity: 0.7;
-        filter: alpha(opacity=70);
-    }
+  float: left;
+  cursor: pointer;
+  background: no-repeat url("/assets/img/jazmin-quaynor-CXjp1ycr5Vw-unsplash.jpg");
+  &:hover {
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+  }
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 #puzzleGame {
-    #container {
-        margin: 0 auto;
-        border: none;
-        background: no-repeat url("/assets/img/jazmin-quaynor-CXjp1ycr5Vw-unsplash.jpg");
-    }
+  #container {
+    margin: 0 auto;
+    border: none;
+    background: no-repeat url("/assets/img/jazmin-quaynor-CXjp1ycr5Vw-unsplash.jpg");
+  }
 }

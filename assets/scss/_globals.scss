@@ -1,20 +1,39 @@
 body {
-    font-family: $font-family;
-    font-size: $font-size;
+  font-family: $font-family;
+  font-size: $font-size;
 }
 
 a {
-    color: $link-color;
-    text-decoration: none;
-    &:hover { color: $base-color }
+  color: $link-color;
+  text-decoration: none;
+  &:hover {
+    color: $base-color;
+  }
 }
 
-header, section, footer { padding: $mPadding }
+header,
+section,
+footer {
+  padding: $mPadding;
+}
 
-.container { @include container(); @include clearfix; }
-.content { @include content() }
+.container {
+  @include container();
+  @include clearfix;
+}
+.content {
+  @include content();
+}
 
-#profile { @include profile() }
-#splash { @include spash() }
-#social-items { @include social-items() }
-#home { text-align: center }
+#profile {
+  @include profile();
+}
+#splash {
+  @include spash();
+}
+#social-items {
+  @include social-items();
+}
+#home {
+  text-align: center;
+}
