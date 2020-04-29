@@ -1,5 +1,5 @@
 var container = document.getElementById("container"),
-    dimension = 1,
+    dimension = 2,
     imageSize = 720;
 
 //module
